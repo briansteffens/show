@@ -1,0 +1,84 @@
+import io;
+import cstring;
+
+u64 print_usage()
+{
+    io::print("Usage: show binary 123\n");
+    return 1;
+}
+
+void handle_binary(u64 value)
+{
+    u8[72] output;
+    u64 bits_written = 0;
+    u8* write = &output;
+
+    while (value != 0)
+    {
+        if (bits_written % 8 == 0 && bits_written > 0)
+        {
+            *write = ' ';
+            write = write + 1;
+        }
+
+        u64 bit = value & 1;
+
+        if (bit == 1)
+        {
+            *write = '1';
+        }
+        else
+        {
+            *write = '0';
+        }
+
+        bits_written = bits_written + 1;
+        write = write + 1;
+        value = value >> 1;
+    }
+
+    while (bits_written % 8 != 0)
+    {
+        *write = '0';
+        write = write + 1;
+        bits_written = bits_written + 1;
+    }
+
+    *write = 0;
+
+    cstring::reverse(&output);
+
+    io::print(&output);
+    io::print("\n");
+
+    return;
+}
+
+u64 main(u64 argc, u64* argv)
+{
+    if (argc != 3)
+    {
+        return print_usage();
+    }
+
+    u64 value;
+
+    if (cstring::to_u64(&argv[2], &value) == false)
+    {
+        io::print("Couldn't parse the input number\n");
+        return 2;
+    }
+
+    u8* arg_format = &argv[1];
+
+    if (cstring::compare(arg_format, "binary"))
+    {
+        handle_binary(value);
+    }
+    else
+    {
+        return print_usage();
+    }
+
+    return 0;
+}
