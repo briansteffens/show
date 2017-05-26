@@ -1,7 +1,7 @@
 show
 ====
 
-Show numbers as various formats (only decimal to binary for now).
+Show numbers in various formats (only decimal to binary for now).
 
 # Compiling from source
 
