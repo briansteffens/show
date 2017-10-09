@@ -54,7 +54,7 @@ void handle_binary(u64 value)
     return;
 }
 
-u64 main(u64 argc, u64* argv)
+u64 main(u64 argc, u8** argv)
 {
     if (argc != 3)
     {
@@ -63,13 +63,13 @@ u64 main(u64 argc, u64* argv)
 
     u64 value;
 
-    if (cstring::to_u64(&argv[2], &value) == false)
+    if (cstring::to_u64(argv[2], &value) == false)
     {
         io::print("Couldn't parse the input number\n");
         return 2;
     }
 
-    u8* arg_format = &argv[1];
+    u8* arg_format = argv[1];
 
     if (cstring::compare(arg_format, "binary"))
     {
