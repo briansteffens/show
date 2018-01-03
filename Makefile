@@ -4,6 +4,9 @@ default: main.bs
 install:
 	cp a.out /usr/local/bin/show
 
+install-symlink:
+	ln -sf $(shell pwd)/a.out /usr/local/bin/show
+
 uninstall:
 	rm /usr/local/bin/show
 
