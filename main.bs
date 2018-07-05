@@ -37,7 +37,7 @@ void handle_binary(u64 value)
         value = value >> 1;
     }
 
-    while (bits_written % 8 != 0)
+    while (bits_written == 0 || bits_written % 8 != 0)
     {
         *write = '0';
         write = write + 1;
